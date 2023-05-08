@@ -1,23 +1,33 @@
-import logo from './logo.svg';
+import { useState, useEffect, useCallback } from 'react';
 import './App.css';
+import Game from './Components/Game';
+import GameOver from './Components/GameOver';
+
+// Components
+import StartScreen from './Components/StartScreen';
+
+// Data
+import { wordsList } from './Data/words';
+
+const stages = [
+  { id: 1, name: 'start' },
+  { id: 2, name: 'game' },
+  { id: 3, name: 'end' },
+];
 
 function App() {
+  const [gameStage, setGameStage] = useState(stages[0].name);
+  const [words] = useState(wordsList);
+
+  const startGame = () => {
+    setGameStage(stages[1].name);
+  };
+  console.log(words);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {gameStage === 'start' && <StartScreen startGame={startGame} />}
+      {gameStage === 'game' && <Game />}
+      {gameStage === 'end' && <GameOver />}
     </div>
   );
 }

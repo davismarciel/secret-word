@@ -12,11 +12,12 @@ const Game = ({
 }) => {
   const [letter, setLetter] = useState('');
   const letterInputRef = useRef(null);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
+    const result = e.target.value.replace(/[^a-z]/gi, '');
     verifyLetter(letter);
-    setLetter('');
+    setLetter('', result);
     letterInputRef.current.focus();
   };
   return (

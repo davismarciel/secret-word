@@ -15,9 +15,8 @@ const Game = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const result = e.target.value.replace(/[^a-z]/gi, '');
+
     verifyLetter(letter);
-    setLetter('', result);
     letterInputRef.current.focus();
   };
   return (

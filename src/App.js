@@ -89,12 +89,29 @@ function App() {
         normalizedLetter,
       ]);
     }
+
+    setGuesses((actualGuesses) => actualGuesses - 1);
   };
-  console.log('ACERTOS: ', guessedLetters);
-  console.log('ERROS: ', wrongLetters);
+
+  const clearLetterStates = () => {
+    setGuessedLetters([]);
+    setWrongLetters([]);
+  };
+
+  useEffect(() => {
+    if (guesses <= 0) {
+      // Reset all states
+
+      clearLetterStates();
+
+      setGameStage(stages[2].name);
+    }
+  }, [guesses]);
 
   // Restart game
   const retry = () => {
+    setScore(0);
+    setGuesses(3);
     setGameStage(stages[0].name);
   };
 
@@ -113,7 +130,7 @@ function App() {
           score={score}
         />
       )}
-      {gameStage === 'end' && <GameOver retry={retry} />}
+      {gameStage === 'end' && <GameOver retry={retry} score={score} />}
     </div>
   );
 }

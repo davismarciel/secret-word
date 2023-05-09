@@ -41,5 +41,6 @@ module.exports = {
     'react/no-array-index-key': 0,
     'react/prop-types': 0,
     'prefer-const': 0,
+    'no-use-before-define': 0,
   },
 };
